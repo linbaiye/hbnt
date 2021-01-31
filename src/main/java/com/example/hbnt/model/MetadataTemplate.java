@@ -8,7 +8,7 @@ import javax.persistence.*;
  * @date 2021/1/31
  */
 @Data
-public abstract class MetadataTemplate<T> {
+public abstract class MetadataTemplate<T>  {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,5 +23,8 @@ public abstract class MetadataTemplate<T> {
 
     String defaultValueString;
 
+    abstract boolean isValidValue(T t);
+
+    abstract Metadata<T> createMetadata(T value);
 
 }

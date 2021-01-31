@@ -23,3 +23,19 @@ CREATE TABLE `ps_product_metadata` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_ps_product_metadata_key` (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='产品元数据'
+
+CREATE TABLE `ps_product_template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '产品模板名称',
+  `product_type` varchar(20) NOT NULL DEFAULT '' COMMENT '适用产品类型：ORDER 订单，BILL 账单',
+  `service_line` varchar(32) NOT NULL DEFAULT '' COMMENT '对应的业务线',
+  `description` varchar(500) NOT NULL DEFAULT '' COMMENT '产品模板描述',
+  `common_config_keys` varchar(1000) NOT NULL DEFAULT '' COMMENT '公共配置项的keys，每个产品只配置一遍，格式：configKey:是否必填0/1，如key1:0,key2:1,key3:0',
+  `private_config_keys` varchar(2000) NOT NULL DEFAULT '' COMMENT '私有配置项的keys，每个产品下的Item都要配置一遍，格式：configKey:是否必填0/1，如key1:0,key2:1,key3:0',
+  `is_deleted` tinyint(4) DEFAULT '0' COMMENT '是否删除，0：正常，1：删除',
+  `add_time` datetime NOT NULL DEFAULT '1900-01-01 00:00:00' COMMENT '记录新增时间',
+  `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录最后一次修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_ps_product_template_name` (`name`),
+  KEY `idx_ps_product_template_serv_type` (`service_line`,`product_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='中台产品配置模板'

@@ -12,8 +12,12 @@ public class MetadataTemplateGroupItem implements Comparable<MetadataTemplateGro
 
     private Integer order;
 
+    private Boolean shared;
+
     @Override
     public int compareTo(MetadataTemplateGroupItem o) {
         return order.compareTo(o.order);
     }
+
+
 }
