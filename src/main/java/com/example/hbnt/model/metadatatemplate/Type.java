@@ -1,4 +1,4 @@
-package com.example.hbnt.model;
+package com.example.hbnt.model.metadatatemplate;
 
 /**
  * @author tao.lin

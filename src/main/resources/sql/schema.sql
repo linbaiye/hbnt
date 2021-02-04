@@ -22,7 +22,7 @@ CREATE TABLE `ps_product_metadata` (
   `modify_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录最后一次修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_ps_product_metadata_key` (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='产品元数据'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='产品元数据';
 
 CREATE TABLE `ps_product_template` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -38,4 +38,4 @@ CREATE TABLE `ps_product_template` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_ps_product_template_name` (`name`),
   KEY `idx_ps_product_template_serv_type` (`service_line`,`product_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='中台产品配置模板'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='中台产品配置模板';

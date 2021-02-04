@@ -1,14 +1,19 @@
 package com.example.hbnt.model;
 
-import java.util.Map;
+import lombok.Builder;
+import lombok.Getter;
+
+import java.util.List;
 
 /**
  * @author tao.lin
  * @date 2021/1/31
  */
+@Getter
+@Builder
 public class ProductTemplate {
 
-    private Map<String, MetadataTemplateGroup> metadataTemplateGroupMap;
+    private Integer id;
 
     private String name;
 
@@ -18,7 +23,8 @@ public class ProductTemplate {
 
     private String productType;
 
+    private List<MetadataTemplateGroup> commonGroup;
 
-
+    private List<MetadataTemplateGroup> privateGroup;
 
 }

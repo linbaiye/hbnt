@@ -14,16 +14,16 @@ import javax.persistence.Persistence;
 @org.springframework.context.annotation.Configuration
 public class Configuration {
 
-    @Bean
-    public EntityManagerFactory entityManagerFactory() {
-        return Persistence.createEntityManagerFactory("HelloPU");
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
-        return jpaTransactionManager;
-    }
+//    @Bean
+//    public EntityManagerFactory entityManagerFactory() {
+//        return Persistence.createEntityManagerFactory("HelloPU");
+//    }
+//
+//    @Bean
+//    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+//        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+//        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
+//        return jpaTransactionManager;
+//    }
 
 }

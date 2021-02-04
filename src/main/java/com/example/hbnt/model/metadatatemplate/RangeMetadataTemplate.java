@@ -1,4 +1,4 @@
-package com.example.hbnt.model;
+package com.example.hbnt.model.metadatatemplate;
 
 
 /**
@@ -15,18 +15,25 @@ public abstract class RangeMetadataTemplate<C extends Comparable<C>> extends Met
 
     static final Comparable<?> INFINITE = null;
 
-    public RangeMetadataTemplate(String name,
+    public RangeMetadataTemplate(Long id,
+                                 Type type,
                                  String key,
+                                 String name,
+                                 C defaultValue,
+                                 String defaultValueString,
+                                 Boolean optional,
+                                 Integer order,
+                                 Boolean shared,
                                  C upperBoundary,
                                  boolean upperOpen,
                                  C lowerBoundary,
                                  boolean lowerOpen) {
+        super(id, type, key, name, defaultValue, defaultValueString, optional, order, shared);
         this.upperBoundary = upperBoundary;
         this.upperOpen = upperOpen;
         this.lowerBoundary = lowerBoundary;
         this.lowerOpen = lowerOpen;
     }
-
 
     @Override
     boolean isValidValue(C value) {
