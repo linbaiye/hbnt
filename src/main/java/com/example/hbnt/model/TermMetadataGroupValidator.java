@@ -2,6 +2,8 @@ package com.example.hbnt.model;
 
 import com.example.hbnt.model.metadatatemplate.*;
 
+import java.io.File;
+
 /**
  * @author tao.lin
  * @date 2021/2/4

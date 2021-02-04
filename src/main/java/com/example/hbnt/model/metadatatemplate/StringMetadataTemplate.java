@@ -11,17 +11,14 @@ import lombok.Getter;
 @Getter
 public class StringMetadataTemplate extends MetadataTemplate<String> {
 
-    @Builder
-    public StringMetadataTemplate(Long id,
-                                  String key,
-                                  String name,
-                                  String defaultValue,
-                                  String defaultValueString,
-                                  Boolean optional,
-                                  Integer order,
-                                  Boolean shared) {
-        super(id, Type.STRING, key, name, defaultValue, defaultValueString, optional, order, shared);
+    public StringMetadataTemplate(Long id, String key, String name, String defaultValue,
+                                  String defaultValueString, Boolean optional, Integer order,
+                                  Boolean shared, String valueJson, String tag, String placeholder,
+                                  String widgetType, String webCheckScript, String range) {
+        super(id, Type.STRING, key, name, defaultValue, defaultValueString, optional, order,
+                shared, valueJson, tag, placeholder, widgetType, webCheckScript, range);
     }
+
 
     @Override
     boolean isValidValue(String s) {

@@ -12,31 +12,12 @@ import java.math.BigDecimal;
 public class DecimalMetadataTemplate extends RangeMetadataTemplate<BigDecimal> {
 
     @Builder
-    public DecimalMetadataTemplate(Long id,
-                                   String key,
-                                   String name,
-                                   BigDecimal defaultValue,
-                                   String defaultValueString,
-                                   Boolean optional,
-                                   Integer order,
-                                   Boolean shared,
-                                   BigDecimal upperBoundary,
-                                   boolean upperOpen,
-                                   BigDecimal lowerBoundary,
-                                   boolean lowerOpen) {
-        super(id,
-                Type.INTEGER,
-                key,
-                name,
-                defaultValue,
-                defaultValueString,
-                optional,
-                order,
-                shared,
-                upperBoundary,
-                upperOpen,
-                lowerBoundary,
-                lowerOpen);
+    public DecimalMetadataTemplate(Long id, String key, String name, BigDecimal defaultValue,
+                                   String defaultValueString, Boolean optional, Integer order,
+                                   Boolean shared, String valueJson, String tag, String placeholder,
+                                   String widgetType, String webCheckScript, String range) {
+        super(id, Type.DECIMAL, key, name, defaultValue, defaultValueString, optional,
+              order, shared, valueJson, tag, placeholder, widgetType, webCheckScript, range);
     }
 
     @Override
@@ -47,5 +28,10 @@ public class DecimalMetadataTemplate extends RangeMetadataTemplate<BigDecimal> {
     @Override
     public void accept(MetadataTemplateVisitor visitor) {
         visitor.visitDecimalTemplate(this);
+    }
+
+    @Override
+    BigDecimal createValue(String str) {
+        return new BigDecimal(str);
     }
 }

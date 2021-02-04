@@ -12,13 +12,15 @@ import lombok.Getter;
 public class BoolMetadataTemplate extends MetadataTemplate<String> {
 
     @Builder
-    public BoolMetadataTemplate(Long id,
-                                String key,
-                                String name,
-                                String defaultValue,
-                                String defaultValueString, Boolean optional, Integer order, Boolean shared) {
-        super(id, Type.BOOL, key, name, defaultValue, defaultValueString, optional, order, shared);
+    public BoolMetadataTemplate(Long id, String key, String name, String defaultValue,
+                                String defaultValueString, Boolean optional, Integer order,
+                                Boolean shared, String valueJson, String tag, String placeholder,
+                                String widgetType, String webCheckScript, String range) {
+        super(id, Type.BOOL, key, name, defaultValue, defaultValueString, optional, order,
+                shared, valueJson, tag, placeholder, widgetType, webCheckScript, range);
     }
+
+    @Builder
 
     @Override
     boolean isValidValue(String s) {

@@ -1,16 +1,20 @@
 package com.example.hbnt.model.metadatatemplate;
 
 import com.example.hbnt.model.Metadata;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @author tao.lin
  * @date 2021/1/31
  */
-@Data
-public abstract class MetadataTemplate<T> implements Comparable<MetadataTemplate<?>> {
+@Getter
+@SuperBuilder
+public abstract class MetadataTemplate<T> implements Comparable<MetadataTemplate<T>> {
 
-    protected Long id;
+    Long id;
 
     Type type;
 
@@ -47,32 +51,15 @@ public abstract class MetadataTemplate<T> implements Comparable<MetadataTemplate
      */
     String webCheckScript;
 
-    public MetadataTemplate(Long id,
-                            Type type,
-                            String key,
-                            String name,
-                            T defaultValue,
-                            String defaultValueString,
-                            Boolean optional,
-                            Integer order,
-                            Boolean shared) {
-        this.id = id;
-        this.type = type;
-        this.key = key;
-        this.name = name;
-        this.defaultValue = defaultValue;
-        this.defaultValueString = defaultValueString;
-        this.optional = optional;
-        this.order = order;
-        this.shared = shared;
-    }
+    String range;
+
 
     abstract boolean isValidValue(T t);
 
     abstract Metadata<T> createMetadata(T value);
 
     @Override
-    public int compareTo(MetadataTemplate<?> o) {
+    public int compareTo(MetadataTemplate<T> o) {
         return order.compareTo(o.order);
     }
 

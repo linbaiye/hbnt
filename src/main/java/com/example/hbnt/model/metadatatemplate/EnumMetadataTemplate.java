@@ -15,17 +15,12 @@ public class EnumMetadataTemplate extends MetadataTemplate<String> {
 
     private List<Value> possibleValues;
 
-    @Builder
-    public EnumMetadataTemplate(Long id,
-                                String key,
-                                String name,
-                                String defaultValue,
-                                String defaultValueString,
-                                Boolean optional,
-                                List<Value> possibleValues,
-                                Integer order, Boolean shared) {
-        super(id, Type.ENUM, key, name, defaultValue, defaultValueString, optional, order, shared);
-        this.possibleValues = possibleValues;
+    public EnumMetadataTemplate(Long id, String key, String name, String defaultValue,
+                                String defaultValueString, Boolean optional, Integer order,
+                                Boolean shared, String valueJson, String tag, String placeholder,
+                                String widgetType, String webCheckScript, String range) {
+        super(id, Type.ENUM, key, name, defaultValue, defaultValueString, optional, order,
+                shared, valueJson, tag, placeholder, widgetType, webCheckScript, range);
     }
 
     @Override
