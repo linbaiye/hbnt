@@ -1,7 +1,7 @@
 package com.example.hbnt.model.metadatatemplate;
 
-import com.example.hbnt.model.Metadata;
-import lombok.Builder;
+import com.example.hbnt.model.metadata.Metadata;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -9,19 +9,11 @@ import java.math.BigDecimal;
  * @author tao.lin
  * @date 2021/2/3
  */
+@NoArgsConstructor
 public class DecimalMetadataTemplate extends RangeMetadataTemplate<BigDecimal> {
 
-    @Builder
-    public DecimalMetadataTemplate(Long id, String key, String name, BigDecimal defaultValue,
-                                   String defaultValueString, Boolean optional, Integer order,
-                                   Boolean shared, String valueJson, String tag, String placeholder,
-                                   String widgetType, String webCheckScript, String range) {
-        super(id, Type.DECIMAL, key, name, defaultValue, defaultValueString, optional,
-              order, shared, valueJson, tag, placeholder, widgetType, webCheckScript, range);
-    }
-
     @Override
-    Metadata<BigDecimal> createMetadata(BigDecimal value) {
+    public Metadata<BigDecimal> createMetadata(BigDecimal value) {
         return null;
     }
 

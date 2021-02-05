@@ -1,66 +1,138 @@
 package com.example.hbnt.model.metadatatemplate;
 
-import com.example.hbnt.model.Metadata;
-import lombok.AllArgsConstructor;
+import com.example.hbnt.model.metadata.Metadata;
 import lombok.Data;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.Date;
 
 /**
  * @author tao.lin
  * @date 2021/1/31
  */
-@Getter
+@Data
 @SuperBuilder
-public abstract class MetadataTemplate<T> implements Comparable<MetadataTemplate<T>> {
+@NoArgsConstructor
+public abstract class MetadataTemplate<T> implements Comparable<MetadataTemplate<?>> {
 
-    Long id;
+    protected Long id;
 
-    Type type;
+    /**
+     * 元数据key
+     */
+    protected String key;
 
-    String key;
+    /**
+     * 元数据名称
+     */
+    protected String name;
 
-    String name;
+    /**
+     * 数据类型 string:字符串 decimal:小数 integer:整数 bool:布尔值(0或1) 5:enum 6:json
+     */
+    protected Type type;
 
-    T defaultValue;
+    /**
+     * 数据范围,type=string|decimal|integer时有效,例如:(0,9]代表>0且<=9;[0,+)代表>=0
+     */
+    protected String range;
 
-    String defaultValueString;
+    /**
+     * 值json,type=bool|enum时有效
+     */
+    protected String valueJson;
 
-    Boolean optional;
+    /**
+     * 默认值
+     */
+    protected String defaultValue;
 
-    Integer order;
+    /**
+     * 校验脚本
+     */
+    protected String checkScript;
 
-    Boolean shared;
+    /**
+     * 分组
+     */
+    protected String group;
 
-    String valueJson;
+    /**
+     * 分组内顺序
+     */
+    protected Integer groupSort;
 
-    String tag;
+    /**
+     * 顺序
+     */
+    protected Integer sort;
+
+    /**
+     * 标签
+     */
+    protected String tag;
 
     /**
      * 界面控件输入提示 widget_type=input|textarea时有效
      */
-    String placeholder;
+    protected String placeholder;
 
     /**
      * 控件类型 input:输入框 radio:单选框 select:下拉列表 checkbox:复选框 textarea:文本域
      */
-    String widgetType;
+    protected String widgetType;
 
     /**
      * 界面校验脚本
      */
-    String webCheckScript;
+    protected String webCheckScript;
 
-    String range;
+    /**
+     * 描述
+     */
+    protected String desc;
 
+    /**
+     * 添加人
+     */
+    protected String addUser;
 
-    abstract boolean isValidValue(T t);
+    /**
+     * 修改人
+     */
+    protected String modifyUser;
 
-    abstract Metadata<T> createMetadata(T value);
+    /**
+     * 是否删除，0：正常，1：删除
+     */
+    protected Integer isDelete;
+
+    /**
+     * 记录新增时间
+     */
+    protected Date addTime;
+
+    /**
+     * 记录最后一次修改时间
+     */
+    protected Date modifyTime;
+
+    protected boolean required;
+
+    public abstract boolean isValidValue(Object v);
+
+    public boolean canCreateMetadata(String key) {
+        return this.key.equalsIgnoreCase(key);
+    }
+
+    public abstract Metadata<T> createMetadata(Object value);
+
+    public void init() { }
 
     @Override
-    public int compareTo(MetadataTemplate<T> o) {
-        return order.compareTo(o.order);
+    public int compareTo(MetadataTemplate<?> o) {
+        return sort.compareTo(o.sort);
     }
 
     public abstract void accept(MetadataTemplateVisitor visitor);

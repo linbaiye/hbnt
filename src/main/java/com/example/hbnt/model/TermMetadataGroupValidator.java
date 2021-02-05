@@ -2,8 +2,6 @@ package com.example.hbnt.model;
 
 import com.example.hbnt.model.metadatatemplate.*;
 
-import java.io.File;
-
 /**
  * @author tao.lin
  * @date 2021/2/4
@@ -12,6 +10,10 @@ public class TermMetadataGroupValidator implements MetadataTemplateGroupValidato
 
     @Override
     public void validate(MetadataTemplateGroup group) {
+        StringMetadataTemplate template = group.find("installmentCycle", StringMetadataTemplate.class);
+        if (template == null) {
+
+        }
         group.visitTemplates(this);
     }
 

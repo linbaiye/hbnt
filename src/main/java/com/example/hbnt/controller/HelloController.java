@@ -1,6 +1,6 @@
 package com.example.hbnt.controller;
 
-import com.example.hbnt.HelloService;
+import com.example.hbnt.service.HelloService;
 import com.example.hbnt.controller.dto.ProductTemplateRespDTO;
 import com.example.hbnt.controller.mapper.ProductTemplateMapper;
 import com.example.hbnt.dao.PsProductMetadataDao;
@@ -32,8 +32,6 @@ public class HelloController {
     private final ProductTemplateMapper productTemplateMapper;
 
 
-
-
 //    @RequestMapping(value = "/batch")
 //    public String test() {
 //        EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -56,6 +54,12 @@ public class HelloController {
         return productTemplateMapper.convert(productTemplateRepository.findById(2));
 //        helloService.update();
     }
+
+    @RequestMapping(value = "/hello")
+    public void test() {
+        metadataDao.findById(2L);
+    }
+
 
 
     @RequestMapping(value = "/test")

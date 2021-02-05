@@ -1,22 +1,28 @@
 package com.example.hbnt.model.metadatatemplate;
 
-import com.example.hbnt.model.Metadata;
-import lombok.Builder;
-import lombok.experimental.SuperBuilder;
+import com.example.hbnt.model.metadata.IntegerMetadata;
+import com.example.hbnt.model.metadata.Metadata;
+import lombok.NoArgsConstructor;
 
 /**
  * @author tao.lin
  * @date 2021/1/31
  */
-@SuperBuilder
+@NoArgsConstructor
 public class IntegerMetadataTemplate extends RangeMetadataTemplate<Integer> {
 
     @Override
-    Metadata<Integer> createMetadata(Integer value) {
-        if (!isValidValue(value)) {
+    public boolean isValidValue(Object v) {
+        return (v instanceof Integer) &&
+                withinRange((Integer) v);
+    }
+
+    @Override
+    public Metadata<Integer> createMetadata(Object v) {
+        if (!isValidValue(v)) {
             throw new IllegalArgumentException("");
         }
-        return null;
+        return new IntegerMetadata(key, (Integer)v);
     }
 
     @Override

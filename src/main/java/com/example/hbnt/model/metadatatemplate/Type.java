@@ -10,6 +10,7 @@ public enum Type {
     INTEGER,
     BOOL,
     ENUM,
-    JSON
+    JSON,
+    LIST
     ;
 }

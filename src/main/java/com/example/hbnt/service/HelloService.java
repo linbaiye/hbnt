@@ -1,4 +1,4 @@
-package com.example.hbnt;
+package com.example.hbnt.service;
 
 import com.example.hbnt.model.metadatatemplate.MetadataTemplate;
 import lombok.AllArgsConstructor;

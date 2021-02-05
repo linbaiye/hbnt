@@ -1,8 +1,8 @@
 package com.example.hbnt.model.metadatatemplate;
 
 
-import com.example.hbnt.respository.ProductTemplateRepositoryImpl;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import java.util.regex.Matcher;
@@ -12,28 +12,22 @@ import java.util.regex.Pattern;
  * @author tao.lin
  * @date 2021/1/31
  */
+@NoArgsConstructor
 public abstract class RangeMetadataTemplate<T extends Comparable<T>> extends MetadataTemplate<T> {
 
     private static final Comparable<?> INFINITE = null;
 
-    private Range range;
+    protected Range range;
 
     private static final Pattern DECIMAL_RANGE_PATTERN = Pattern.compile("^([(\\[])(-|-?\\d+(\\.\\d+)?),(-?\\d+(\\.\\d+)?|\\+)([])])$");
 
-    public RangeMetadataTemplate(Long id, Type type, String key, String name,
-                                 T defaultValue, String defaultValueString, Boolean optional,
-                                 Integer order, Boolean shared, String valueJson,
-                                 String tag, String placeholder, String widgetType,
-                                 String webCheckScript, String range) {
-        super(id, type, key, name, defaultValue, defaultValueString, optional, order,
-                shared, valueJson, tag, placeholder, widgetType, webCheckScript, range);
-    }
-
     abstract T createValue(String str);
 
-    public void parseRange() {
+    @Override
+    public void init() {
         if (!StringUtils.hasText(super.range)) {
-            range = new Range(null, false, null, false);
+            range = new Range(null, true, null, true);
+            return;
         }
         String exp = super.range.replaceAll("\\s+", "");
         Matcher matcher = DECIMAL_RANGE_PATTERN.matcher(exp);
@@ -49,9 +43,9 @@ public abstract class RangeMetadataTemplate<T extends Comparable<T>> extends Met
         range = new Range(upperValue, upperOpen, lowerValue, lowerOpen);
     }
 
-    @Override
-    boolean isValidValue(T value) {
-        return range.isWithin(value);
+
+    boolean withinRange(T v) {
+        return range.isWithin(v);
     }
 
     @AllArgsConstructor
