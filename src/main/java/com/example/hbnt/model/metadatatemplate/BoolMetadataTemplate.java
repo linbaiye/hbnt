@@ -1,6 +1,5 @@
 package com.example.hbnt.model.metadatatemplate;
 
-import com.example.hbnt.model.metadata.Metadata;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -12,20 +11,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 @NoArgsConstructor
-public class BoolMetadataTemplate extends MetadataTemplate<String> {
+public class BoolMetadataTemplate extends EnumMetadataTemplate {
 
-    @Override
-    public boolean isValidValue(String s) {
-        return false;
-    }
-
-    @Override
-    public Metadata<String> createMetadata(String value) {
-        return null;
-    }
-
-    @Override
-    public void accept(MetadataTemplateVisitor visitor) {
-        visitor.visitBoolTemplate(this);
-    }
 }

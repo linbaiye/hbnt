@@ -1,6 +1,6 @@
 package com.example.hbnt.controller.dto;
 
-import com.example.hbnt.model.metadatatemplate.MetadataTemplate;
+import com.example.hbnt.model.metadatatemplate.AbstractMetadataTemplate;
 import lombok.Builder;
 import lombok.Data;
 
@@ -33,6 +33,6 @@ public class ProductTemplateRespDTO {
 
         private String groupName;
 
-        private List<MetadataTemplate<?>> metadataList;
+        private List<AbstractMetadataTemplate<?>> metadataList;
     }
 }

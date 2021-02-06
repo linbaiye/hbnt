@@ -28,27 +28,14 @@ public class ProductTemplateRepositoryImpl implements ProductTemplateRepository 
 
     private final PsProductTemplateDao psProductTemplateDao;
 
-    private MetadataTemplate<?> create(PsProductMetadata metadata, boolean optional) {
-        MetadataTemplate<?> template;
-        if (Type.INTEGER.name().equalsIgnoreCase(metadata.getType())) {
-            template = new IntegerMetadataTemplate();
-        } else if (Type.DECIMAL.name().equalsIgnoreCase(metadata.getType())) {
-            template = new DecimalMetadataTemplate();
-        } else if (Type.STRING.name().equalsIgnoreCase(metadata.getType())) {
-            template = new StringMetadataTemplate();
-        } else if (Type.ENUM.name().equalsIgnoreCase(metadata.getType())) {
-            template = new EnumMetadataTemplate();
-        } else if (Type.BOOL.name().equalsIgnoreCase(metadata.getType())) {
-            template = new BoolMetadataTemplate();
-        } else {
-            throw new IllegalArgumentException("");
-        }
+    private AbstractMetadataTemplate<?> create(PsProductMetadata metadata, boolean optional) {
+        Type type = Type.valueOf(metadata.getType().toUpperCase());
+        AbstractMetadataTemplate<?> template = type.createTemplate(metadata);
         template.setRequired(!optional);
         BeanUtils.copyProperties(metadata, template);
         template.init();
         return template;
     }
-
 
     private List<MetadataTemplateGroup> parseMetadataTemplateGroup(Map<String, Boolean> keys,
                                                                    Set<PsProductMetadata> metadataSet) {

@@ -5,7 +5,7 @@
 <!--             version="2.1">-->
 <!--    <persistence-unit name="HelloPU" transaction-type="RESOURCE_LOCAL" >-->
 <!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
-<!--        <class>com.example.hbnt.model.metadatatemplate.MetadataTemplate</class>-->
+<!--        <class>com.example.hbnt.model.metadatatemplate.AbstractMetadataTemplate</class>-->
 <!--        <properties>-->
 <!--            <property name="hibernate.connection.datasource" value="hello"/>-->
 <!--            <property name="hibernate.dialect.storage_engine" value="innodb"/>-->

@@ -12,8 +12,7 @@ import java.util.Set;
 public interface PsProductMetadataDao extends JpaRepository<PsProductMetadata, Long> {
 
     /**
-     * @param keys
-     * @return
      */
     Set<PsProductMetadata> findByKeyIn(Set<String> keys);
+
 }

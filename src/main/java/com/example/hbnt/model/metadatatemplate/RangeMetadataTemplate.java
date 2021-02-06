@@ -13,11 +13,11 @@ import java.util.regex.Pattern;
  * @date 2021/1/31
  */
 @NoArgsConstructor
-public abstract class RangeMetadataTemplate<T extends Comparable<T>> extends MetadataTemplate<T> {
+public abstract class RangeMetadataTemplate<T extends Comparable<T>> extends AbstractMetadataTemplate<T> {
 
     private static final Comparable<?> INFINITE = null;
 
-    protected Range range;
+    private Range range;
 
     private static final Pattern DECIMAL_RANGE_PATTERN = Pattern.compile("^([(\\[])(-|-?\\d+(\\.\\d+)?),(-?\\d+(\\.\\d+)?|\\+)([])])$");
 

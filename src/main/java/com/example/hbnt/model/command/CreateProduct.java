@@ -1,15 +1,17 @@
 package com.example.hbnt.model.command;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 /**
  * 创建template.
@@ -20,7 +22,6 @@ import java.util.function.Consumer;
 @Getter
 public class CreateProduct {
 
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     private String name;
 
@@ -58,26 +59,60 @@ apr: 0.12
      */
 
 
+    @Data
+    public static class Item {
+
+        /**
+         * 配置项名称，如3期按月计息
+         */
+        private String itemName;
+
+        /**
+         * 生效时间（用于产品筛选）
+         */
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private Date validTime;
+
+        /**
+         * 失效时间（用于产品筛选）
+         */
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private Date invalidTime;
+
+        /**
+         * 贷款金额下限（用于产品筛选）
+         */
+        private BigDecimal amountLowerLimit;
+
+        /**
+         * 贷款金额上限（用于产品筛选）
+         */
+        private BigDecimal amountUpperLimit;
+
+        /**
+         * 配置项详情（JSON）
+         *
+         */
+        private Map<String, Object> detailJson;
+
+    }
+
+
     public Map<String, Object> parseDetail() {
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(detailJson, HashMap.class);
         } catch (Exception e) {
             throw new IllegalArgumentException(e);
         }
     }
 
-    public void foreEachItem(Consumer<Map<String, Object>> consumer) {
+    public List<Item> parseItemArray() {
         try {
-            List<HashMap<String, Object>> items = objectMapper.readValue(itemsJsonArray,
-                    new TypeReference<List<HashMap<String, Object>>>() {
-                    });
-            for (HashMap<String, Object> item : items) {
-                consumer.accept(item);
-            }
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(itemsJsonArray, new TypeReference<List<Item>>() {});
         } catch (Exception e) {
             throw new IllegalArgumentException(e);
         }
-
     }
-
 }

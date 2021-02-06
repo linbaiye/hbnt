@@ -1,16 +1,17 @@
 package com.example.hbnt.controller;
 
-import com.example.hbnt.service.HelloService;
 import com.example.hbnt.controller.dto.ProductTemplateRespDTO;
 import com.example.hbnt.controller.mapper.ProductTemplateMapper;
-import com.example.hbnt.dao.PsProductMetadataDao;
+import com.example.hbnt.factory.CommandFactory;
+import com.example.hbnt.model.product.Product;
 import com.example.hbnt.model.ProductTemplateRepository;
+import com.example.hbnt.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 
 /**
  * @author tao.lin
@@ -21,62 +22,22 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class HelloController {
 
-//    private final EntityManagerFactory entityManagerFactory;
-
-    private final HelloService helloService;
-
-    private final PsProductMetadataDao metadataDao;
+    private final ProductService productService;
 
     private final ProductTemplateRepository productTemplateRepository;
 
     private final ProductTemplateMapper productTemplateMapper;
 
+    private final CommandFactory commandFactory;
 
-//    @RequestMapping(value = "/batch")
-//    public String test() {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        try {
-//            EntityTransaction transaction = entityManager.getTransaction();
-//            transaction.begin();
-//            for (int i = 0; i < 3; i++) {
-//            }
-//            transaction.commit();
-//        } finally {
-//            entityManager.close();
-//        }
-//        return "OK";
-//    }
-
-
-    @RequestMapping(value = "/update")
-    public ProductTemplateRespDTO update() {
-//        metadataDao.findById(1L);
+    @RequestMapping(value = "/find")
+    public ProductTemplateRespDTO find() {
         return productTemplateMapper.convert(productTemplateRepository.findById(2));
-//        helloService.update();
     }
 
-    @RequestMapping(value = "/hello")
-    public void test() {
-        metadataDao.findById(2L);
+    @RequestMapping(value = "/create")
+    public List<Product> create() {
+        return productService.createProducts(commandFactory.createCommand());
     }
 
-
-
-    @RequestMapping(value = "/test")
-    public String hello(@RequestParam(name = "name") String name,
-                        @RequestParam(name = "value") String value) {
-//        MetadataTemplate template = new MetadataTemplate(null, name, value);
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        try {
-//            EntityTransaction transaction = entityManager.getTransaction();
-//            transaction.begin();
-//            entityManager.persist(template);
-//            transaction.commit();
-//        } finally {
-//            entityManager.close();
-//        }
-//        return template.toString();
-
-        return "OK";
-    }
 }

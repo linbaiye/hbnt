@@ -1,7 +1,6 @@
 package com.example.hbnt.model.metadatatemplate;
 
 import com.example.hbnt.model.metadata.IntegerMetadata;
-import com.example.hbnt.model.metadata.Metadata;
 import lombok.NoArgsConstructor;
 
 /**
@@ -14,20 +13,20 @@ public class IntegerMetadataTemplate extends RangeMetadataTemplate<Integer> {
     @Override
     public boolean isValidValue(Object v) {
         return (v instanceof Integer) &&
-                withinRange((Integer) v);
+                withinRange((Integer) v) ||
+                ((v instanceof String) &&
+                withinRange(Integer.valueOf((String)v)));
     }
 
     @Override
-    public Metadata<Integer> createMetadata(Object v) {
+    public IntegerMetadata createMetadata(Object v) {
         if (!isValidValue(v)) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException(v.toString());
         }
-        return new IntegerMetadata(key, (Integer)v);
-    }
-
-    @Override
-    public void accept(MetadataTemplateVisitor visitor) {
-        visitor.visitIntegerTemplate(this);
+        if (v instanceof Integer) {
+            return new IntegerMetadata(key, (Integer) v);
+        }
+        return new IntegerMetadata(key, createValue((String)v));
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public abstract class MetadataTemplate<T> implements Comparable<MetadataTemplate<?>> {
+public abstract class AbstractMetadataTemplate<T> implements Comparable<AbstractMetadataTemplate<?>> {
 
     protected Long id;
 
@@ -122,18 +122,12 @@ public abstract class MetadataTemplate<T> implements Comparable<MetadataTemplate
 
     public abstract boolean isValidValue(Object v);
 
-    public boolean canCreateMetadata(String key) {
-        return this.key.equalsIgnoreCase(key);
-    }
-
     public abstract Metadata<T> createMetadata(Object value);
 
     public void init() { }
 
     @Override
-    public int compareTo(MetadataTemplate<?> o) {
+    public int compareTo(AbstractMetadataTemplate<?> o) {
         return sort.compareTo(o.sort);
     }
-
-    public abstract void accept(MetadataTemplateVisitor visitor);
 }

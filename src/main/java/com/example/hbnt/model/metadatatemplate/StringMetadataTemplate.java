@@ -13,20 +13,19 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 @NoArgsConstructor
-public class StringMetadataTemplate extends MetadataTemplate<String> {
+public class StringMetadataTemplate extends AbstractMetadataTemplate<String> {
 
     @Override
-    public boolean isValidValue(String s) {
-        return true;
+    public boolean isValidValue(Object s) {
+        return s instanceof String;
     }
 
     @Override
-    public Metadata<String> createMetadata(Object value) {
-        return new StringMetadata(key, (String)value);
+    public StringMetadata createMetadata(Object value) {
+        if (isValidValue(value)) {
+            return new StringMetadata(key, (String)value);
+        }
+        throw new IllegalArgumentException("");
     }
 
-    @Override
-    public void accept(MetadataTemplateVisitor visitor) {
-        visitor.visitStringTemplate(this);
-    }
 }
