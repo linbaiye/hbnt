@@ -9,9 +9,12 @@ import com.example.hbnt.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author tao.lin
@@ -31,8 +34,12 @@ public class HelloController {
     private final CommandFactory commandFactory;
 
     @RequestMapping(value = "/find")
-    public ProductTemplateRespDTO find() {
-        return productTemplateMapper.convert(productTemplateRepository.findById(2));
+    public Map<String, Object> find(@RequestParam(name = "id") Integer id) {
+//        public ProductTemplateRespDTO find(@RequestParam(name = "id") Integer id) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", "OK");
+        result.put("content", productTemplateMapper.convert(productTemplateRepository.findById(id)));
+        return result;
     }
 
     @RequestMapping(value = "/create")

@@ -20,8 +20,7 @@ public class DecimalMetadataTemplate extends RangeMetadataTemplate<BigDecimal> {
 
     @Override
     public boolean isValidValue(Object v) {
-        return (v instanceof BigDecimal) &&
-                withinRange((BigDecimal) v) ||
+        return (v instanceof BigDecimal) && withinRange((BigDecimal) v) ||
                 ((v instanceof Double) && withinRange(BigDecimal.valueOf((Double)v)));
     }
 
